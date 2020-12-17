@@ -1,8 +1,23 @@
-# 라이브러리
+# React-route-dom(1)
 
-## react에서 router 라이브러리를 사용하는 이유
+## JSX로 라우팅 이동하기
 
-1. 
+## react에서 router 라이브러리를 사용하는 이유!
+
+1. 리액트 사이트에 가보면 다음과 같은 말이 대문짝만하게 적혀있습니다. 
+2.  A JavaScript library for building user interfaces.
+3. 즉 사용자 인터페이스를 만들기 위한 JavaScript 라이브러리란 뜻이죠 ! 
+4. 이렇듯 react는 view의, view에 의한, view를 위한 라이브러리라고 말할 수 있습니다.
+5. 그렇기 때문에 Angular 같은 프레임워크들과는 다르게  react의 경우는 view만을 담당하는 라이브러리 이기 때문에 라우팅을 담당하는 react-router를 설치해 주어야 합니다. 
+6. 또 나중에 model과 controller를 담당하는 패키지 또한 설치해줘야만 합니다 ! 
+7. 오늘은 react에서 라우팅을 도와주는 react-router-dom 라이브러리에 사용법에 대해서 알아보겠습니다.
+
+## 그렇다면 react-router-dom이란 무엇인가요?
+
+1. 먼저 react-router-dom은 react의 공식적인 라이브러리 처럼 보이지만 사실은 비공식 라이브러리 입니다 . 
+2. React Router v3 까지는 정적인 라우팅을 사용했다면 v4부터는 동적인 라우팅을 사용합니다(현재는 v5) .
+3. v3와 v4의 차이는 다음과 같습니다.
+4. <img width="599" alt="스크린샷 2020-12-17 오전 12 52 30" src="https://user-images.githubusercontent.com/75972718/102372159-46fc8a80-4002-11eb-8221-2e7b532c4403.png">
 
 ## react-router-dom
 
@@ -27,43 +42,40 @@
 
 4. BrowserRouter 
 
-   1. history API를 사용해 URL과 UI를 동기화 하는 라우터.
+   1. history API를 사용해 URL과 UI를 동기화 하는 라우터입니다.
 
 5. Route
 
-   1.  컴포넌트의 속성에 설정된 URL과 현재 경로가 일치하면 해당하는 컴포넌트, 함수를 렌더링 한다.
-   2. path로 설정해 놓은 경로를 업데이트 하고 싶은 컴포넌트(props)와 연결한다 
+   1.  컴포넌트의 속성에 설정된 URL과 현재 경로가 일치하면 해당하는 컴포넌트, 함수를 렌더링 합니다.
+   2. path로 설정해 놓은 경로를 업데이트 하고 싶은 컴포넌트(props)와 연결합니다. 
 
 6. Exact
 
-   1. 경로가 중복되어서 두 개 이상의 컴포넌트가 동시에 렌더링 되는 것을 막는다.
-   2. 위의 코드에서 profile 이라는 component가 두개 존재 할때 react-router-dom의 매칭 알고리즘에 의해서 두 경로가 정확하게 같을때만 Profile로 연결이 된다.
-   3. 그렇기 때문에 아래의 /Prifile/:id 와 같이 /로 붙어서 다른경로를 가르키게 될 경우에 렌더링 시키지 않는다. 
+   1. 경로가 중복되어서 두 개 이상의 컴포넌트가 동시에 렌더링 되는 것을 막습니다.
+   2. 위의 코드에서 profile 이라는 component가 두개 존재 할때 react-router-dom의 매칭 알고리즘에 의해서 두 경로가 정확하게 같을때만 Profile로 연결이 됩니다.
+   3. 그렇기 때문에 아래의 /Prifile/:id 와 같이 /로 붙어서 다른경로를 가르키게 될 경우에 렌더링 시키지 않습니다. 
 
 7. Link 
 
    1.  'a'태그와 비슷하다, a 태그의 href의 역할을 to 속성이 한다. 서버에 갔다 오지 않고 링크로 이동한다, 기록이 history 스택에 저장됩니다.
 
-8. ### Switch 
+8. Swich
 
    1.  자식 컴포넌트 Route 또는 Redirect 중 매치되는 첫 번째 요소를 렌더링합니다. Switch를 사용하면 BrowserRouter만 사용할 때와 다르게 하나의 매칭되는 요소만 렌더링한다는 점을 보장해줍니다.
-
-   2. 사용하지 않을 경우 매칭 되는 모두를 렌더링 합니다 .
-
-   3. #### Switch 사용법
-
-      1. 기존 방식의 경우 각 path와 component를 병렬로 평가해서 렌더링 한다 .
-      2. 하지만 Switch 문을 사용할 경우 순차적으로 매칭시켜서 렌더링 한다 .
-      3. <img width="511" alt="스크린샷 2020-12-16 오후 4 57 01" src="https://user-images.githubusercontent.com/75972718/102320589-daf93280-3fbf-11eb-889a-cd4bc3b5ab02.png">
-      4. switch문의 특징은
-         1. 각 비교문이 포함 관계에 있다면 순서에 따라 결과가 달라진다.
-         2. 이게 어떤 의미냐면 /라는 경로는 /about의 포함관계이기 때문에 /라는 경로를 먼저 적어주고 뒤에 /about이라는 경로를 적어줘도 /about으로는 갈 수 없습니다 때문에 포함관계를 생각해서 경로를 작성해 줘야합니다.
-         3. 위의 코드를 포함관계를 고려해서 작성하면 다음과 같습니다.
-         4. <img width="511" alt="스크린샷 2020-12-16 오후 5 01 27" src="https://user-images.githubusercontent.com/75972718/102321040-78ecfd00-3fc0-11eb-8748-a218d165e693.png">
-      5. 그리고 가장 마지막에 어떤 경로에도 매칭되는 Route를 하나 작성해 줍니다 .
-         1. 그리고 NotFound.jsx파일을 하나 생성해 줍니다.
-         2. <img width="1362" alt="스크린샷 2020-12-16 오후 5 08 29" src="https://user-images.githubusercontent.com/75972718/102321750-763ed780-3fc1-11eb-9b38-83e44f820f19.png">
-         3. 위와 같은 방법으로 잘못된 경로에 대한 처리를 해 줄 수 있습니다.
+   2.  사용하지 않을 경우 매칭 되는 모두를 렌더링 합니다 .
+   3.  Switch 사용법
+       1. 기존 방식의 경우 각 path와 component를 병렬로 평가해서 렌더링 합니다 .
+       2. 하지만 Switch 문을 사용할 경우 순차적으로 매칭시켜서 렌더링 합니다 .
+       3. <img width="511" alt="스크린샷 2020-12-16 오후 4 57 01" src="https://user-images.githubusercontent.com/75972718/102320589-daf93280-3fbf-11eb-889a-cd4bc3b5ab02.png">
+       4. switch문의 특징은
+          1. 각 비교문이 포함 관계에 있다면 순서에 따라 결과가 달라진다.
+          2. 이게 어떤 의미냐면 /라는 경로는 /about의 포함관계이기 때문에 /라는 경로를 먼저 적어주고 뒤에 /about이라는 경로를 적어줘도 /about으로는 갈 수 없습니다 때문에 포함관계를 생각해서 경로를 작성해 줘야합니다.
+          3. 위의 코드를 포함관계를 고려해서 작성하면 다음과 같습니다.
+          4. <img width="511" alt="스크린샷 2020-12-16 오후 5 01 27" src="https://user-images.githubusercontent.com/75972718/102321040-78ecfd00-3fc0-11eb-8748-a218d165e693.png">
+       5. 그리고 가장 마지막에 어떤 경로에도 매칭되는 Route를 하나 작성해 줍니다 .
+          1. 그리고 NotFound.jsx파일을 하나 생성해 줍니다.
+          2. <img width="1362" alt="스크린샷 2020-12-16 오후 5 08 29" src="https://user-images.githubusercontent.com/75972718/102321750-763ed780-3fc1-11eb-9b38-83e44f820f19.png">
+          3. 위와 같은 방법으로 잘못된 경로에 대한 처리를 해 줄 수 있습니다.
 
 9. ### Dynamic Routing (정해지지 않은 경로,라우팅)
 
@@ -105,9 +117,9 @@
 
     16. <img width="557" alt="스크린샷 2020-12-16 오후 3 56 33" src="https://user-images.githubusercontent.com/75972718/102315379-691ceb00-3fb7-11eb-9c91-e7ef3023259c.png">
 
-    17. 이때 주의 해야할 점은 Profile/3에서 match.params로 꺼내온 Id 값의 타입은 string이다. 
+    17. 이때 주의 해야할 점은 Profile/3에서 match.params로 꺼내온 Id 값의 타입은 string이라는 점입니다. 
 
-    18. 그렇다면 About/?id=3과 같은 쿼리스트링은 어떤 방식으로 대응할 수 있을까?
+    18. 그렇다면 About/?id=3과 같은 쿼리스트링은 어떤 방식으로 대응할 수 있을까요?
 
 11. #### 쿼리스트링 방식
 
@@ -130,7 +142,7 @@
           2. <img width="812" alt="스크린샷 2020-12-16 오후 4 36 31" src="https://user-images.githubusercontent.com/75972718/102318632-ff9fdb00-3fbc-11eb-9c45-be4998f83a73.png">
           3. URLSearchParams는 객체 인스턴스를 반환하는데 public 하지 않기 때문에 메서드를 사용해서 꺼내와야합니다 . 
           4. <img width="985" alt="스크린샷 2020-12-16 오후 4 43 29" src="https://user-images.githubusercontent.com/75972718/102319272-f6fbd480-3fbd-11eb-8f4e-3c592fbf4208.png">
-          5. 하지만 이 방법 역시 IE를 아예 지원하지 않는 단점이 존재한다 .
+          5. 하지만 이 방법 역시 IE를 아예 지원하지 않는 단점이 존재합니다 .
        3. 외부 라이브러리를 사용하는 방법(Query String)
           1. 라이브 러리를 사용할땐 검증된 라이브러리를 사용하는 것을 권장합니다.
           2. 설치
@@ -142,24 +154,14 @@
 ### 사실 지금까지의 과정만으로는 SPA라고 할 수 없다.
 
 1. 우리가 기본적으로 사이트간 이동을 할때 li태그에 a태그를 활용하는데
-
-2.  a태그의 기본 동작은 href의 적힌 URL을 바꿔주고 서버에 가서 페이지를 받아와서 로딩하는 서버사이드렌더링을 기본동작으로 하기때문에 SPA라고 할 수 없습니다.
-
+2. a태그의 기본 동작은 href의 적힌 URL을 바꿔주고 서버에 가서 페이지를 받아와서 로딩하는 서버사이드렌더링을 기본동작으로 하기때문에 SPA라고 할 수 없습니다.
 3. 그렇기 때문에 a 태그가 아닌 Link태그를 사용해야하고 href속성도 to라는 속성으로 바꿔서 작성해 줘야합니다.
-
 4. <img width="485" alt="스크린샷 2020-12-16 오후 5 30 17" src="https://user-images.githubusercontent.com/75972718/102323952-82786400-3fc4-11eb-9b0d-bc5054fe9e3e.png">
-
 5. 이 Link 태그가 하는 일은 history API를 사용해서 URL을 바꿔주고 Switch문 내부의 경로를 따라 서버에 갔다 오지 않고 렌더링만 바꿔줍니다 .
-
 6. Link로 작성된 코드는 아래와 같이 실제 DOM에는 a태그로 나오지만 Link 컴포넌트가 내부적으로 a태그의 기본 동작을 바꿔줌으로써 클라이언트 사이드 렌더링을 할 수 있게됩니다.
-
 7. <img width="350" alt="스크린샷 2020-12-16 오후 5 33 37" src="https://user-images.githubusercontent.com/75972718/102324277-f87ccb00-3fc4-11eb-9c35-beb518263d1f.png">
-
-8.  NavLink를 사용하면 Link와 동일하게 동작하지만 추가적으로 몇가지를 더 할 수 있습니다 
-
-   1. <img width="332" alt="스크린샷 2020-12-16 오후 5 44 01" src="https://user-images.githubusercontent.com/75972718/102325387-6c6ba300-3fc6-11eb-89db-03e5048b728d.png">
+8.  NavLink를 사용하면 Link와 동일하게 동작하지만 추가적으로 몇가지의 기능을 더 할 수 있습니다 
+1. <img width="332" alt="스크린샷 2020-12-16 오후 5 44 01" src="https://user-images.githubusercontent.com/75972718/102325387-6c6ba300-3fc6-11eb-89db-03e5048b728d.png">
    2. <img width="238" alt="스크린샷 2020-12-16 오후 5 44 29" src="https://user-images.githubusercontent.com/75972718/102325442-7d1c1900-3fc6-11eb-9cc8-29b311aef3aa.png">
-   3. activeClassName, activeStyle 처럼 active 상태에 대한 스타일 지정이 가능합니다.
-   4. Route의 Path 처럼 동작하기 때문에 exact가 있습니다 . 
-
-   
+   3. activeClassName, activeStyle 처럼 active 상태에 대한 스타일 지정이 가능합니다. 
+10. 이렇게 JSX를 사용해서 라우팅 하는법에 대해서 알아봤습니다 다음 장에서는 Javascript를 이용해 라우팅하는 방법에 대해서 알아보겠습니다.
